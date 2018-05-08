@@ -7,12 +7,12 @@ import './style/Chat.css';
 
 export default class Chat extends Component {
     render() {
-        const stream = this.props.stream;
+        const state = this.props.state;
         return (
             <div className="Chat">
-                <ChatBody stream={stream}/>
-                <ChatSendBox stream={stream}/>
-                <ChatHeader stream={stream}/>
+                <ChatBody message={state.message}/>
+                <ChatSendBox message={state.message}/>
+                <ChatHeader session={state.session}/>
             </div>
         );
     }

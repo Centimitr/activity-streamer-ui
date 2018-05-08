@@ -2,20 +2,36 @@ import React, {Component} from 'react';
 
 import './style/ChatBody.css';
 import ChatMessage from "./ChatMessage";
-import {observer} from "mobx-react/index";
+import {observer} from 'mobx-react';
 
-const ChatBody = observer(class ChatBody extends Component {
+@observer
+class ChatBody extends Component {
+    end = React.createRef();
+    body = React.createRef();
+
+    scrollToBottom() {
+        if (this.end.current) {
+            this.end.current.scrollIntoView({behavior: 'smooth'})
+        }
+    }
+
+    componentDidUpdate() {
+        this.scrollToBottom()
+    }
+
     render() {
-        const stream = this.props.stream;
+        console.log('render');
+        const message = this.props.message;
         return (
-            <div className="ChatBody">
+            <div className="ChatBody" ref={this.body}>
                 <div className="ChatBody-Leading"/>
-                {stream.messages.map(
-                    (message, idx) => <ChatMessage message={message} key={idx}/>
+                {message.messages.map(
+                    (msg, idx) => <ChatMessage value={msg} key={idx}/>
                 )}
+                <div ref={this.end}/>
             </div>
         );
     }
-});
+}
 
 export default ChatBody;

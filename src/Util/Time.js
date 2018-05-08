@@ -1,4 +1,4 @@
-async function Sleep(duration) {
+async function sleep(duration) {
     let r;
     const p = new Promise(resolve => r = resolve);
     setTimeout(() => r(), duration);
@@ -6,5 +6,5 @@ async function Sleep(duration) {
 }
 
 export var time = {
-    Sleep
+    sleep
 };

@@ -1,26 +1,27 @@
 import React, {Component} from 'react';
 
 import './style/ChatToolBar.css';
-import {observer} from "mobx-react/index";
+import {observer} from "mobx-react";
 
-const ChatToolBar = observer(class ChatToolBar extends Component {
+@observer
+class ChatToolBar extends Component {
 
     render() {
-        const stream = this.props.stream;
+        const message = this.props.message;
         return (
             <div className="ChatToolBar">
                 <div className="ChatToolBar-Row">
                     <div>
-                        <button onClick={stream.clearMessages}>Clear Screen</button>
-                        <button onClick={stream.formatDraft}>Format</button>
+                        <button onClick={message.clear}>Clear Screen</button>
+                        <button onClick={message.formatDraft}>Format</button>
                     </div>
                     <div>
-                        <button className={stream.valid ? 'accept' : 'refuse'} onClick={stream.send}>Send</button>
+                        <button className={message.valid ? 'accept' : 'refuse'} onClick={message.send}>Send</button>
                     </div>
                 </div>
             </div>
         );
     }
-});
+}
 
 export default ChatToolBar;

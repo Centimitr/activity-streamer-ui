@@ -5,22 +5,23 @@ import ChatToolBar from "./ChatToolBar";
 import AceEditor from 'react-ace';
 import 'brace/mode/json';
 import 'brace/theme/github';
-import {observer} from "mobx-react/index";
+import {observer} from 'mobx-react';
 
-const ChatSendBox = observer(class ChatSendBox extends Component {
+@observer
+class ChatSendBox extends Component {
 
-    stream = this.props.stream;
+    message = this.props.message;
 
     onChange = value => {
-        this.stream.draft = value;
-        this.stream.check();
+        this.message.draft = value;
+        this.message.checkDraft();
     };
 
     render() {
-        const stream = this.stream;
+        const message = this.message;
         return (
             <div className="ChatSendBox">
-                <ChatToolBar stream={stream}/>
+                <ChatToolBar message={message}/>
                 <AceEditor
                     focus
                     mode="json"
@@ -30,7 +31,7 @@ const ChatSendBox = observer(class ChatSendBox extends Component {
                     height="170px"
                     fontSize={12}
                     name="ChatSendBox-Ace"
-                    value={stream.draft}
+                    value={message.draft}
                     onChange={this.onChange}
                     editorProps={{$blockScrolling: Infinity}}
                     // onChange={this.onChange}
@@ -44,6 +45,6 @@ const ChatSendBox = observer(class ChatSendBox extends Component {
             </div>
         );
     }
-});
+}
 
 export default ChatSendBox;

@@ -6,8 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import state from "./State/State";
 import {Test} from "./State/Test";
 
-ReactDOM.render(<App stream={state}/>, document.getElementById('root'));
+ReactDOM.render(<App state={state}/>, document.getElementById('root'));
 registerServiceWorker();
 
-const test = new Test();
-test.run(state).then();
+Test.basic(state).then();
